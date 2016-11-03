@@ -1,13 +1,13 @@
-function beta =SGD(x,y)
+function beta =SGD(x,y,lamda)
 [row_x,column_x]=size(x);
 x=[x,ones(row_x,1)];  %加入全1的特征维度
 column_x=column_x+1;
 
 %%
 %初始化参数
-r0=1;   %r=r0/(lamda*t);
-lamda=1;    %之后通过交叉验证
-T0=0.5;
+r0=0.1;   %r=r0/(lamda*t);
+%lamda=1;    %之后通过交叉验证
+T0=0.1;
 T=floor(row_x*T0);   
 beta=zeros(column_x,T+1);
 %%

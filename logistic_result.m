@@ -10,6 +10,6 @@ for i=1:length(t)
     w=beta(:,t(i));
     f(i)=sum(log(exp(y'.*(w'*x'))+ones(1,row_x)))/row_x + lamda*norm(w,1);
 end
-figure 1
-plot(T([1:length(t)]),f)
+figure 
+plot(1:length(t),f)
 
