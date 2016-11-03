@@ -1,0 +1,58 @@
+function beta =SGD(x,y)
+[row_x,column_x]=size(x);
+x=[x,ones(row_x,1)];  %加入全1的特征维度
+column_x=column_x+1;
+
+%%
+%初始化参数
+beta=zeros(column_x,1);
+r0=1;   %r=r0/(lamda*t);
+lamda=1;    %之后通过交叉验证
+T0=0.5;
+T=floor(row_x*T0);   
+
+%%
+%随机选择一个点，进行更新beta
+x_choose_index=randi(row_x,1,T);  %一共选择T个
+dete=zeros(column_x,1);
+dete(1)=1;
+for t=1:T
+    
+    r=r0/(lamda*t);
+    xc=x(x_choose_index(t),:)';
+    yc=y(x_choose_index(t));
+    
+    beta1=beta;
+    beta1(beta1>0)=1;
+    beta1(beta1<0)=-1;
+    gbeta=(xc*(-yc*exp(-yc*beta'*xc))/(1+exp(-yc*beta'*xc))+lamda*beta1);
+    beta=beta-r*gbeta;
+    %%
+    %检验梯度是否求对
+    beta2=beta+dete;
+    f=log(1+exp(-yc*beta'*xc))+lamda*norm(beta,1);
+    f_2=f+*gbeta;
+    f2=log(1+exp(-yc*beta2'*xc))+lamda*norm(beta2,1);
+    
+    
+    
+
+end
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end
